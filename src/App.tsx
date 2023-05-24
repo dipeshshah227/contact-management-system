@@ -6,10 +6,10 @@ import Navbar from "./views/Navbar";
 
 function App() {
   return (
-    <PrivateRoute>
+    <>
       <Navbar />
       <Home />
-    </PrivateRoute>
+    </>
   );
 }
 

@@ -1,17 +1,17 @@
-import AuthLayout from "../components/layout/AuthLayout";
+import { useEffect, useState } from "react";
+
 import { SubmitHandler, useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
-import InputField from "../components/InputField";
-import password from "../assets/password.svg";
+
 import email from "../assets/icon/email.svg";
 import lock from "../assets/icon/lock.svg";
+import password from "../assets/password.svg";
 import axiosClient from "../axios/AxiosConfig";
-import PublicRoute from "../route/PublicRoute";
-import { useAppDispatch } from "../store/hooks";
-import { detectState, setState } from "../slice/authslice";
-import { useEffect, useLayoutEffect } from "react";
 import Button from "../components/Button";
-import { useState } from "react";
+import InputField from "../components/InputField";
+import AuthLayout from "../components/layout/AuthLayout";
+import { detectState, setState } from "../slice/authslice";
+import { useAppDispatch } from "../store/hooks";
 
 interface Idata {
   email: string;
@@ -56,60 +56,58 @@ const Login = () => {
   };
 
   return (
-    <PublicRoute>
-      <AuthLayout image={password}>
-        <div className="h-[80%] p-4 flex flex-col  justify-center items-center">
-          <h1 className="text-3xl ">Welcome back</h1>
-          <p className="text-xs text-gray-400 font-light pt-4">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore
-            pariatur doloribus rerum nemo libero reiciendis quas necessitatibus
-          </p>
-          <form
-            className="w-full flex flex-col  space-y-8 relative mt-4"
-            onSubmit={handleSubmit(onSubmit)}
-          >
-            <InputField
-              icon={email}
-              type="text"
-              placeholder="Email"
-              label="email"
-              att={{
-                ...register("email", {
-                  required: "email is required",
-                  pattern: {
-                    value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                    message: "Invalid email",
-                  },
-                }),
-              }}
-              error={errors.email?.message as string}
-            />
+    <AuthLayout image={password}>
+      <div className="h-[80%] p-4 flex flex-col  justify-center items-center">
+        <h1 className="text-3xl ">Welcome back</h1>
+        <p className="text-xs text-gray-400 font-light pt-4">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore
+          pariatur doloribus rerum nemo libero reiciendis quas necessitatibus
+        </p>
+        <form
+          className="w-full flex flex-col  space-y-8 relative mt-4"
+          onSubmit={handleSubmit(onSubmit)}
+        >
+          <InputField
+            icon={email}
+            type="text"
+            placeholder="Email"
+            label="email"
+            att={{
+              ...register("email", {
+                required: "email is required",
+                pattern: {
+                  value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                  message: "Invalid email",
+                },
+              }),
+            }}
+            error={errors.email?.message as string}
+          />
 
-            <InputField
-              icon={lock}
-              type="password"
-              placeholder="Password"
-              label="password"
-              att={{
-                ...register("password", {
-                  required: "Password is required",
-                  minLength: {
-                    value: 8,
-                    message: "Password must be at least 8 digits long",
-                  },
-                }),
-              }}
-              error={errors.password?.message as string}
-            />
-            <Button loading={loading} />
-          </form>
+          <InputField
+            icon={lock}
+            type="password"
+            placeholder="Password"
+            label="password"
+            att={{
+              ...register("password", {
+                required: "Password is required",
+                minLength: {
+                  value: 8,
+                  message: "Password must be at least 8 digits long",
+                },
+              }),
+            }}
+            error={errors.password?.message as string}
+          />
+          <Button loading={loading} />
+        </form>
 
-          <Link to="/register" className="text-sm mt-4 underline">
-            Don't have a account?
-          </Link>
-        </div>
-      </AuthLayout>
-    </PublicRoute>
+        <Link to="/register" className="text-sm mt-4 underline">
+          Don't have a account?
+        </Link>
+      </div>
+    </AuthLayout>
   );
 };
 

@@ -1,11 +1,10 @@
 import React, { ChangeEvent, useEffect, useRef, useState } from "react";
 
 import { useLocation, useNavigate } from "react-router-dom";
-import axiosClient from "../axios/AxiosConfig";
 
+import axiosClient from "../axios/AxiosConfig";
 import verifytoken from "../assets/verifytoken.svg";
 import AuthLayout from "../components/layout/AuthLayout";
-import PublicRoute from "../route/PublicRoute";
 import { detectState } from "../slice/authslice";
 import { useAppDispatch } from "../store/hooks";
 
@@ -113,45 +112,41 @@ const VerifyToken: React.FC = () => {
   };
   // console.log(otp.join(""));
   return (
-    <PublicRoute>
-      <AuthLayout image={verifytoken}>
-        <div className="h-[80%]  p-4 flex flex-col justify-center items-center mt-28">
-          <h1 className="text-3xl">Verify Token</h1>
-          <p className=" text-sm text-center pt-4">
-            Please enter the verification OTP sent to{" "}
-            <span className="font-semibold">{location.state?.email}</span>{" "}
-          </p>
+    <AuthLayout image={verifytoken}>
+      <div className="h-[80%]  p-4 flex flex-col justify-center items-center mt-28">
+        <h1 className="text-3xl">Verify Token</h1>
+        <p className=" text-sm text-center pt-4">
+          Please enter the verification OTP sent to{" "}
+          <span className="font-semibold">{location.state?.email}</span>{" "}
+        </p>
 
-          <div className="flex gap-4 mt-2">
-            {otp.map((value, index) => (
-              <input
-                key={index}
-                type="number"
-                className="w-9 h-12 border outline-purple-500 rounded pl-3 text-2xl caret-transparent "
-                onChange={(e) => handleInputChange(e, index)}
-                onKeyDown={(e) => handleKeyDown(e, index)}
-                value={value}
-                autoFocus={index === 0}
-                ref={(el) => (inputRefs.current[index] = el!)}
-              />
-            ))}
-          </div>
-          {error && (
-            <span className="absolute text-red-500 top-80 text-sm">
-              {error}
-            </span>
-          )}
-
-          <button
-            className="bg-purple-900 w-32 text-white p-2 px-6 rounded cursor-pointer hover:bg-purple-700 m-auto mt-8"
-            type="submit"
-            onClick={handleSubmit}
-          >
-            Submit
-          </button>
+        <div className="flex gap-4 mt-2">
+          {otp.map((value, index) => (
+            <input
+              key={index}
+              type="number"
+              className="w-9 h-12 border outline-purple-500 rounded pl-3 text-2xl caret-transparent "
+              onChange={(e) => handleInputChange(e, index)}
+              onKeyDown={(e) => handleKeyDown(e, index)}
+              value={value}
+              autoFocus={index === 0}
+              ref={(el) => (inputRefs.current[index] = el!)}
+            />
+          ))}
         </div>
-      </AuthLayout>
-    </PublicRoute>
+        {error && (
+          <span className="absolute text-red-500 top-80 text-sm">{error}</span>
+        )}
+
+        <button
+          className="bg-purple-900 w-32 text-white p-2 px-6 rounded cursor-pointer hover:bg-purple-700 m-auto mt-8"
+          type="submit"
+          onClick={handleSubmit}
+        >
+          Submit
+        </button>
+      </div>
+    </AuthLayout>
   );
 };
 

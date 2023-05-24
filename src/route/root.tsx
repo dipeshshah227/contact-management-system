@@ -4,31 +4,49 @@ import Register from "../views/Register";
 import App from "../App";
 import VerifyToken from "../views/VerifyToken";
 import CompleteRegistration from "../views/CompleteRegistration";
+import PublicRoute from "./PublicRoute";
+import PrivateRoute from "./PrivateRoute";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
+    element: (
+      <PrivateRoute>
+        <App />
+      </PrivateRoute>
+    ),
   },
   {
     path: "/login",
-    element: <Login />,
+    element: (
+      <PublicRoute>
+        <Login />
+      </PublicRoute>
+    ),
   },
   {
     path: "/register",
-    element: <Register />,
+    element: (
+      <PublicRoute>
+        <Register />
+      </PublicRoute>
+    ),
   },
   {
     path: "/verifytoken",
-    element: <VerifyToken />,
-  },
-  {
-    path: "/verifytoken",
-    element: <VerifyToken />,
+    element: (
+      <PublicRoute>
+        <VerifyToken />
+      </PublicRoute>
+    ),
   },
   {
     path: "/completeregistration",
-    element: <CompleteRegistration />,
+    element: (
+      <PublicRoute>
+        <CompleteRegistration />
+      </PublicRoute>
+    ),
   },
 ]);
 
